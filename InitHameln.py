@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import csv
+import csv, os
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 cookies = {'over18': 'off'}
@@ -11,10 +11,11 @@ def main():
     seen = set()
 
     # 既に取得済みの小説IDを読み込み
-    with open("Heaven'sMemoPad.csv", 'r', encoding="utf-8") as f:
-        reader = csv.reader(f)
-        for record in reader:
-            seen.add(record[1])
+    if os.path.exists("Heaven'sMemoPad.csv"):
+        with open("Heaven'sMemoPad.csv", 'r', encoding="utf-8") as f:
+            reader = csv.reader(f)
+            for record in reader:
+                seen.add(record[1])
 
     while True:
         # 取得する小説のIDを入力

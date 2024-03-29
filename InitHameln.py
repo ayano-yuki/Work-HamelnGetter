@@ -1,12 +1,13 @@
 from bs4 import BeautifulSoup
 import requests
 import csv, os
+from main import main
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 cookies = {'over18': 'off'}
 base_url = 'https://syosetu.org/novel/'
 
-def main():
+def InitHameln():
     records = []
     seen = set()
 
@@ -47,4 +48,8 @@ def main():
         writer.writerows(records)
         
 if __name__ == '__main__':
+    # 小説IDを入力してCSVに追加
+    InitHameln()
+    
+    # 追加した小説をダウンロード
     main()
